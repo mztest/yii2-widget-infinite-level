@@ -53,10 +53,12 @@ class InfiniteLevel extends InputWidget
         if (!isset($this->containerOptions['id'])) {
             $this->containerOptions['id'] = $this->getId(). '-'. $this->options['id'] .'-container';
         }
-        
-        if (!$this->inputOptions['prompt']) {
+
+        if (!isset($this->inputOptions['prompt'])) {
             $this->inputOptions['prompt'] = Yii::t('app', 'Please Choose');
         }
+
+        $this->inputOptions = ArrayHelper::merge($this->inputOptions, ['id' => false]);
     }
 
     /**
@@ -82,20 +84,19 @@ class InfiniteLevel extends InputWidget
     {
         if ($this->hasModel()) {
             $hidden = Html::activeHiddenInput($this->model, $this->attribute);
-
-            $input = Html::activeDropDownList($this->model, $this->attribute, $this->getRootList(), $this->inputOptions);
         } else {
             $hidden = Html::hiddenInput($this->name, $this->value);
-
-            $input = Html::dropDownList($this->name, $this->value, $this->getRootList(), $this->inputOptions);
         }
 
         $inputContainerTag = ArrayHelper::remove($this->inputContainerOptions, 'tag', 'div');
-        $input = Html::tag($inputContainerTag, $input, $this->inputContainerOptions);
+        $input = Html::tag(
+            $inputContainerTag,
+            Html::dropDownList(null, $this->getRoot(), $this->getRootList(), $this->inputOptions),
+            $this->inputContainerOptions);
 
         $containerTag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
 
-        return $hidden . Html::tag($containerTag, $input, $this->containerOptions);
+        return Html::tag($containerTag, $hidden . $input, $this->containerOptions);
     }
 
     /**
@@ -111,6 +112,13 @@ class InfiniteLevel extends InputWidget
         }
 
         return $result;
+    }
+    /**
+     * @return array
+     */
+    protected function getRoot()
+    {
+        return isset($this->itemParents[0]) ? $this->itemParents[0] : '';
     }
 
 }

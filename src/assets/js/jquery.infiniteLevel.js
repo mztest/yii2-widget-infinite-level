@@ -7,32 +7,32 @@
             items: {},
             itemParents: []
         };
-        
+
         options && $.extend(_options, options);
 
         this.each(function() {
-            var element = $(this), inner = element.find('.row');
+            var element = $(this);
             element.on('change', 'select', function () {
                 var that = $(this),
                     input = $('input:hidden', element),
                     selectedVal = $.trim(that.val()),
-                    level, inputVal, childSelected;
+                    level = that.data('level') || 0,
+                    inputVal, childSelected;
 
-                level = that.data('level') || 0;
                 if (selectedVal) {
                     inputVal = selectedVal;
                 } else if (level > 0) {
-                    inputVal = $("select:eq("+(level-1)+")", inner).val();
+                    inputVal = $("select:eq("+(level-1)+")", element).val();
                 } else {
                     inputVal = '';
                 }
 
-                childSelected = _options['itemParents'][level+1] || 0;
+                childSelected = _options['itemParents'][level+1] || '';
 
-                var col = $('div[class^=col-md-]', inner);
+                var col = $('div[class^=col-md-]', element);
                 clearSubLevel(col, level);
                 if (selectedVal && _options.items[selectedVal]) {
-                    rebuildLevel(inner, _options.items[selectedVal], level, childSelected);
+                    rebuildLevel(element, _options.items[selectedVal], level, childSelected);
                     input.val(inputVal);
                     $('select:last', element).change();
                 } else {
@@ -63,7 +63,7 @@
                 }
 
                 $.each(data, function(i, v) {
-                    segments.push('<option value="'+v.value+'" '+ ((selected == i) ? ' selected=""' :'')+'>'+v.label+'</option>');
+                    segments.push('<option value="'+v.value+'" '+ ((selected == v.value) ? ' selected=""' :'')+'>'+v.label+'</option>');
                 });
 
                 dom.find('select').empty().html(segments);
