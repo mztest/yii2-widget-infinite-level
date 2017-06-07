@@ -1,11 +1,11 @@
 {
-    "name": "mztest/yii2-widget-infinity-level",
+    "name": "mztest/yii2-widget-infinite-level",
     "keywords": [
         "yii2",
         "widget",
         "infinity level"
     ],
-    "homepage": "https://github.com/mztest/yii2-widget-infinity-level",
+    "homepage": "https://github.com/mztest/yii2-widget-infinite-level",
     "license": "MIT",
     "authors": [
         {
@@ -14,10 +14,12 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "yiisoft/yii2": "^2.0"
+    },
     "autoload": {
         "psr-4": {
-            "mztest\\infinityLevel\\": "src"
+            "mztest\\infiniteLevel\\": "src"
         }
     }
 }

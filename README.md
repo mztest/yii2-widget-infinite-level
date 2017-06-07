@@ -1,1 +1,1 @@
-# yii2-widget-infinity-level
+# yii2-widget-infinite-level
