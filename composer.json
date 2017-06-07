@@ -14,9 +14,7 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-        "yiisoft/yii2": "^2.0"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "mztest\\infiniteLevel\\": "src"
