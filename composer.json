@@ -1,0 +1,23 @@
+{
+    "name": "mztest/yii2-widget-infinity-level",
+    "keywords": [
+        "yii2",
+        "widget",
+        "infinity level"
+    ],
+    "homepage": "https://github.com/mztest/yii2-widget-infinity-level",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guo Xiaosong",
+            "email": "mztester@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "mztest\\infinityLevel\\": "src"
+        }
+    }
+}
