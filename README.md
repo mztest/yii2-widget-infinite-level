@@ -26,7 +26,7 @@ Simply use it in your code by  :
     ```php
     use mztest\infiniteLevel\InfiniteLevel;
     <?= $form->field($model, 'parent_id')->widget(InfiniteLevel::className(), [
-        'items' => ['All data here'],
+        'items' => [['value' => 'value1', 'label' =>'label1'], ['value' => 'value2', 'label' =>'label2']],
         'itemParents' => ['Parents ID here']
     ]) ?>
     ```
